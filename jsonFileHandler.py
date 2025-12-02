@@ -1,0 +1,17 @@
+from json import dumps, load
+
+def read_file(filePath):
+    try:
+        fileData = None
+        with open(filePath) as f:
+            fileData = load(f)
+            f.close()
+        return fileData
+    except:
+        return[]
+
+def saveFile(fileName, data):
+    jsonFile = open(fileName, "w") 
+    jsonFile.write(dumps(data))
+    jsonFile.close()
+    print("Datos guardados correctamente")
