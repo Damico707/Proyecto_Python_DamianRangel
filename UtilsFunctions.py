@@ -54,3 +54,21 @@ def categories(info):
 
     for item in info["data"]: 
         print(TEMPLATE.format(item['monto'], item['category'], item['Description'], item['time']))
+
+def minimenu (Dates, categoria, numerito):
+     Dates = read_file(PRODUCT_FILE_PATH)
+            otros = []
+        for content in Dates:                    
+            if content["category"] == 3:         
+                otros.append(content)            
+        if len(otros)== 0:
+            print("¡No haz realizado ningun gasto extra!")
+        else:
+            Dates = read_file(PRODUCT_FILE_PATH)
+            print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
+            print("===             Categoria = Entretenimiento             ===")
+            print("---------------------------------------------------------------------------------")
+            print("= MONTO GASTADO         DESCRIPCION DEL GASTO \n")
+            for content in Dates:
+                if content ["category"] == 3:
+                     print(f" ${content['monto']:<14} {content['Description']:<40}")

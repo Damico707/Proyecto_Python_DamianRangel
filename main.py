@@ -57,33 +57,21 @@ while True:
                     if len(Dates) == 0:
                         print("¡No tienes ningun gasto registrado!")
                     else:
-                        print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
+                        print("\n                === P R O D U C T O S  R E G I S T R A D O S ===")
                         print("---------------------------------------------------------------------------------")
-                        print("= MONTO GASTADO         CATEGORIA DEL GASTO          DESCRIPCION DEL GASTO \n")
+                        print("\n= MONTO GASTADO         CATEGORIA DEL GASTO          DESCRIPCION          FECHA")
+                        print("                                                      DEL GASTO       ")
+                        print("---------------------------------------------------------------------------------")
                         for content in Dates:
-                            print(f" {content['monto']:<22} {Diccionario_cat[content['category']]:<12}  {content['Description']:<13}")
+                            print(f" {content['monto']:<22} {Diccionario_cat[content['category']]:<27}  {content['Description']:<18} {content['time']}")
                
                 case 2:
                      choice = menuu("    C A T E G O R I A S     ","(selecciona para ver los gastos)", categorias )
                      match choice:
-                         case 1:
-                            Dates = read_file(PRODUCT_FILE_PATH)
-                            otros = []
-                            for content in Dates:                    
-                                if content["category"] == 1:         
-                                    otros.append(content)            
-                            if len(otros)== 0:
-                                print("¡No haz realizado ningun gasto extra!")
-                            else:
-                                Dates = read_file(PRODUCT_FILE_PATH)
-                                print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
-                                print("===             Categoria = Entretenimiento             ===")
-                                print("---------------------------------------------------------------------------------")
-                                print("= MONTO GASTADO         DESCRIPCION DEL GASTO \n")
-                                for content in Dates:
-                                    if content ["category"] == 1:
-                                         print(f" ${content['monto']:<14} {content['Description']:<40}")       
-                         case 2:
+                        case 1:
+                              #Arregle la funcion y apliquela / comida
+                              print(...)
+                        case 2:
                             Dates = read_file(PRODUCT_FILE_PATH)
                             otros = []
                             for content in Dates:                    
@@ -100,7 +88,7 @@ while True:
                                 for content in Dates:
                                     if content ["category"] == 2:
                                          print(f" ${content['monto']:<14} {content['Description']:<40}")     
-                         case 3:
+                        case 3:
                             Dates = read_file(PRODUCT_FILE_PATH)
                             otros = []
                             for content in Dates:                    
@@ -117,7 +105,7 @@ while True:
                                 for content in Dates:
                                     if content ["category"] == 3:
                                          print(f" ${content['monto']:<14} {content['Description']:<40}")           
-                         case 4:
+                        case 4:
                             Dates = read_file(PRODUCT_FILE_PATH)
                             otros = []
                             for content in Dates:                    
