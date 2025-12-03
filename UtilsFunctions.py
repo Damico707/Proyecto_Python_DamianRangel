@@ -1,5 +1,12 @@
 from datetime import datetime
 
+Diccionario_cat = {
+        1: "Comida",
+        2: "Transporte",
+        3: "Entretenimiento",
+        4: "Otros"
+    }
+
 def correct_number(mensaje, tipo=int, rango=None):
     while True:
         try:
@@ -55,20 +62,77 @@ def categories(info):
     for item in info["data"]: 
         print(TEMPLATE.format(item['monto'], item['category'], item['Description'], item['time']))
 
-def minimenu (Dates, categoria, numerito):
-     Dates = read_file(PRODUCT_FILE_PATH)
-            otros = []
+def minimenu (Dates, numerito, categoria):
+        Dates
+        otros = []
         for content in Dates:                    
-            if content["category"] == 3:         
+            if content["category"] == numerito:         
                 otros.append(content)            
         if len(otros)== 0:
             print("¡No haz realizado ningun gasto extra!")
         else:
-            Dates = read_file(PRODUCT_FILE_PATH)
-            print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
-            print("===             Categoria = Entretenimiento             ===")
-            print("---------------------------------------------------------------------------------")
-            print("= MONTO GASTADO         DESCRIPCION DEL GASTO \n")
+            
+            Dates
+            print("=======================================================")
+            print("         P R O D U C T O S  R E G I S T R A D O S ")
+            print(f"                 Categoria = {categoria}         ")
+            print("=======================================================")
+            print(" |     MONTO     |     DESCRIPCION    |    ")
+            print(" |    GASTADO    |      DEL GASTO     |   FECHA ")
+            print("------------------------------------------------------")
             for content in Dates:
-                if content ["category"] == 3:
-                     print(f" ${content['monto']:<14} {content['Description']:<40}")
+                if content ["category"] == numerito:
+                     print(f" ${content['monto']:<17} {content['Description']:<19} {content['time']:<}")
+
+
+#def Monto_diario (Dates, fecha):
+#        fechafinal = datetime.strptime(fecha, "%d-%m-%Y")
+#        Dates
+#        otros = []
+#        for content in Dates:                    
+#            if content["time"] == fechafinal:         
+#                otros.append(content)            
+#        if len(otros)== 0:
+#            print("No tienes registrados gastos en esta fecha !")
+#        else:
+#            Dates
+#            print("=======================================================")
+#            print("         P R O D U C T O S  R E G I S T R A D O S ")
+#            print(f"                    fecha : {fecha}                   ")
+#            print("=======================================================")
+#            print(" |     MONTO     |        CATEGORIA        |   DESCRIPCION     |         ")
+#            print(" |    GASTADO    |        DEL GASTO        |    DEL GASTO      |   FECHA ")
+#            print("------------------------------------------------------")
+#            for content in Dates:
+#                if content ["time"] == fechafinal:
+#                     print(f" ${content['monto']:<17} {content['category']:<17} {content['Description']:<19} {content['time']:<}")
+
+def Monto_diarioo(Dates, fecha):
+    try:
+        fecha_validada = datetime.strptime(fecha, "%d-%m-%Y") 
+    except ValueError:
+        print("Formato de fecha incorrecto. Usa (DD-MM-YYYY)")
+        return
+    otros = []
+    total_gasto = 0
+
+    for content in Dates:                    
+        if content["time"] == fecha:  
+            otros.append(content)
+            total_gasto += content["monto"]
+    if len(otros) == 0:
+        print(f"\n¡No tienes registrados gastos en la fecha {fecha}!")
+    else:
+        print("\n=======================================================")
+        print("         P R O D U C T O S  R E G I S T R A D O S ")
+        print(f"                    Fecha: {fecha}                   ")
+        print("=======================================================")
+        print(" MONTO GASTADO    CATEGORÍA    DESCRIPCIÓN           FECHA")
+        print("---------------------------------------------------------------")
+        
+        for content in Dates:
+            if content ["time"] == fecha:
+                print(f" ${content['monto']:<17} {Diccionario_cat[content['category']]:<27} {content['Description']:<19} {content['time']:<}")
+        
+        print("---------------------------------------------------------------")
+        print(f" TOTAL DEL DÍA: ${total_gasto}")

@@ -3,11 +3,17 @@ from UtilsFunctions import *
 from datetime import datetime
 
 PRODUCT_FILE_PATH= "./Database/infoData.json"
+
 options = ("Registrar un nuevo gasto",
 "Listar gastos",
 "Calcular total de gastos",
 "Generar reporte de gastos",
 "Finalizar programa",)
+
+caso3_gastos = ("Calcular total diario",
+"Calcular total semanal",
+"Calcular total mensual",
+"Regresar al menu principal")
 
 listar_Gastos = ("Ver todos los gastos",
 "Filtrar por categoria",
@@ -69,60 +75,17 @@ while True:
                      choice = menuu("    C A T E G O R I A S     ","(selecciona para ver los gastos)", categorias )
                      match choice:
                         case 1:
-                              #Arregle la funcion y apliquela / comida
-                              print(...)
+                             Dates = read_file(PRODUCT_FILE_PATH)
+                             minimenu(Dates, 1, "Comida")
                         case 2:
-                            Dates = read_file(PRODUCT_FILE_PATH)
-                            otros = []
-                            for content in Dates:                    
-                                if content["category"] == 2:         
-                                    otros.append(content)            
-                            if len(otros)== 0:
-                                print("¡No haz realizado ningun gasto extra!")
-                            else:
-                                Dates = read_file(PRODUCT_FILE_PATH)
-                                print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
-                                print("===             Categoria = Entretenimiento             ===")
-                                print("---------------------------------------------------------------------------------")
-                                print("= MONTO GASTADO         DESCRIPCION DEL GASTO \n")
-                                for content in Dates:
-                                    if content ["category"] == 2:
-                                         print(f" ${content['monto']:<14} {content['Description']:<40}")     
+                             Dates = read_file(PRODUCT_FILE_PATH)
+                             minimenu(Dates, 2, "Transporte")
                         case 3:
+                             Dates = read_file(PRODUCT_FILE_PATH)
+                             minimenu(Dates, 3, "Entretenimiento")           
+                        case 4: 
                             Dates = read_file(PRODUCT_FILE_PATH)
-                            otros = []
-                            for content in Dates:                    
-                                if content["category"] == 3:         
-                                    otros.append(content)            
-                            if len(otros)== 0:
-                                print("¡No haz realizado ningun gasto extra!")
-                            else:
-                                Dates = read_file(PRODUCT_FILE_PATH)
-                                print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
-                                print("===             Categoria = Entretenimiento             ===")
-                                print("---------------------------------------------------------------------------------")
-                                print("= MONTO GASTADO         DESCRIPCION DEL GASTO \n")
-                                for content in Dates:
-                                    if content ["category"] == 3:
-                                         print(f" ${content['monto']:<14} {content['Description']:<40}")           
-                        case 4:
-                            Dates = read_file(PRODUCT_FILE_PATH)
-                            otros = []
-                            for content in Dates:                    
-                                if content["category"] == 4:         
-                                    otros.append(content)            
-                            if len(otros)== 0:
-                                print("¡No haz realizado ningun gasto extra!")
-                            else:
-                                Dates = read_file(PRODUCT_FILE_PATH)
-                                print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
-                                print("===             Categoria = Entretenimiento             ===")
-                                print("---------------------------------------------------------------------------------")
-                                print("= MONTO GASTADO         DESCRIPCION DEL GASTO \n")
-                                for content in Dates:
-                                    if content ["category"] == 4:
-                                         print(f" ${content['monto']:<14} {content['Description']:<40}")                                                                          
-                   
+                            minimenu(Dates, 4, "Otros")                                                                            
                 case 3:
                     print("Filtrar por fechas")
                     try:
@@ -138,4 +101,9 @@ while True:
                 case 4:
                      break
        case 3:  #calcular total
-         print(":3")
+         choice = menuu( "    C A L C U L A R", "   (total gastos)", caso3_gastos)
+         match choice:
+            case 1:
+                 Dates = read_file(PRODUCT_FILE_PATH)
+                 Total_diario= input("Para sacar el total diario, ingreas la fecha a eleccion (DIA-MES-AÑO)\n -->")
+                 Monto_diarioo(Dates, Total_diario)
