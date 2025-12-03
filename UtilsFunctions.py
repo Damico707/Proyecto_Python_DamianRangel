@@ -1,4 +1,6 @@
-def correct_number(mensaje, tipo=float, rango=None):
+from datetime import datetime
+
+def correct_number(mensaje, tipo=int, rango=None):
     while True:
         try:
             valor = tipo(input(mensaje))
@@ -29,3 +31,26 @@ def menuu(titulo, title, options):
         except ValueError:
             print("Error, Solo se aceptan numeros")    
     return choice
+    
+def filtroFecha(datalist, fecha_ini, fecha_fin ):
+    results = {"data": []}
+    for gasto in datalist:
+        fecha_str = gasto["time"]
+        try:
+            fecha_obj = datetime.strptime(fecha_str, "%d-%m-%Y")
+            if fecha_ini <= fecha_obj <= fecha_fin:
+                results["data"].append(gasto)
+        except ValueError:
+            continue
+    return results
+
+def categories(info):
+    TEMPLATE_TITLE = "{:^0}{:^20}{:^20}{:^20}"
+    TEMPLATE = "{:<12}{:<18}{:<20}{:<20}"
+    print(TEMPLATE_TITLE.format(" MONTO", "CATEGORIA", "DESCRIPCION", "FECHA" ))
+    if len(info["data"]) == 0:
+        print("No se encontraron gatos en esta categoria...")
+        return
+
+    for item in info["data"]: 
+        print(TEMPLATE.format(item['monto'], item['category'], item['Description'], item['time']))

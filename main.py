@@ -1,5 +1,6 @@
 from jsonFileHandler import *
 from UtilsFunctions import *
+from datetime import datetime
 
 PRODUCT_FILE_PATH= "./Database/infoData.json"
 options = ("Registrar un nuevo gasto",
@@ -134,7 +135,19 @@ while True:
                                     if content ["category"] == 4:
                                          print(f" ${content['monto']:<14} {content['Description']:<40}")                                                                          
                    
+                case 3:
+                    print("Filtrar por fechas")
+                    try:
+                        fecha1 = input("Ingrese la fecha de inicio (DIA-MES-AÑO) -> ")
+                        objDate1 = datetime.strptime(fecha1, "%d-%m-%Y") 
+                        fecha2 = input("Ingrese la fecha límite (DIA-MES-AÑO) -> ")
+                        objDate2 = datetime.strptime(fecha2, "%d-%m-%Y")
+                        dataGasto = read_file(PRODUCT_FILE_PATH)
+                        info = filtroFecha(dataGasto, objDate1, objDate2)
+                        categories(info)
+                    except ValueError:
+                            print("Formato de fecha no válido (DIA-MES-AÑO)")
                 case 4:
-                    break
+                     break
        case 3:  #calcular total
          print(":3")
