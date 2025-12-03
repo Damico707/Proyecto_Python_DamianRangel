@@ -20,6 +20,11 @@ Diccionario_cat = {
         4: "Otros"
     }
 
+categorias= (" Comida.",
+" Transporte.",
+" Entretenimiento.",
+" Otros.")
+
 while True:
     choice = menuu("| O R G A N I Z A D O R|" , "--Gastos Diarios--" , options)
     match choice:
@@ -27,24 +32,16 @@ while True:
             content = {
                 "monto": correct_number("¿De cuanto fue el gasto?\n --< ",),
                 "category": correct_number("\n1. Comida\n2. Transporte\n3. Entretenimiento\n4. Otros\nSelecciona la categoria del gasto\n --> ", int, range(1, 5)),
-                "Description":input("Descripcion del gasto //'Enter' para dejar vacio:\n -->")
+                "Description":input("Descripcion del gasto //'Enter' para dejar vacio:\n -->"),
+                "time":input("Ingrese la fecha del gasto\n formato 'DIA-MES-AÑO'\n -->")
             }
 
              
             print("\n*** Datos guardados correctamente***")
             print(f"Monto: ${content['monto']}")
-
-            #if content['category'] == 1:
-            #    print("Categoría: 1 - Comida")
-            #elif content['category'] == 2:
-            #    print("Categoría: 2 - Transporte")
-            #elif content['category'] == 3:
-            #    print("Categoría: 3 - Entretenimiento")
-            #elif content['category'] == 4:
-            #    print("Categoría: 4 - Otros")
-            # print(f"Descripción: {content['Description']}")
             print(f"Categoría: {content['category']} , {Diccionario_cat[content['category']]}")
             print(f"Descripción: {content['Description']}")
+            print(f"Fecha: {content['time']}")
 
             datacontent = read_file(PRODUCT_FILE_PATH)
             datacontent.append(content)
@@ -64,7 +61,80 @@ while True:
                         print("= MONTO GASTADO         CATEGORIA DEL GASTO          DESCRIPCION DEL GASTO \n")
                         for content in Dates:
                             print(f" {content['monto']:<22} {Diccionario_cat[content['category']]:<12}  {content['Description']:<13}")
+               
+                case 2:
+                     choice = menuu("    C A T E G O R I A S     ","(selecciona para ver los gastos)", categorias )
+                     match choice:
+                         case 1:
+                            Dates = read_file(PRODUCT_FILE_PATH)
+                            otros = []
+                            for content in Dates:                    
+                                if content["category"] == 1:         
+                                    otros.append(content)            
+                            if len(otros)== 0:
+                                print("¡No haz realizado ningun gasto extra!")
+                            else:
+                                Dates = read_file(PRODUCT_FILE_PATH)
+                                print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
+                                print("===             Categoria = Entretenimiento             ===")
+                                print("---------------------------------------------------------------------------------")
+                                print("= MONTO GASTADO         DESCRIPCION DEL GASTO \n")
+                                for content in Dates:
+                                    if content ["category"] == 1:
+                                         print(f" ${content['monto']:<14} {content['Description']:<40}")       
+                         case 2:
+                            Dates = read_file(PRODUCT_FILE_PATH)
+                            otros = []
+                            for content in Dates:                    
+                                if content["category"] == 2:         
+                                    otros.append(content)            
+                            if len(otros)== 0:
+                                print("¡No haz realizado ningun gasto extra!")
+                            else:
+                                Dates = read_file(PRODUCT_FILE_PATH)
+                                print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
+                                print("===             Categoria = Entretenimiento             ===")
+                                print("---------------------------------------------------------------------------------")
+                                print("= MONTO GASTADO         DESCRIPCION DEL GASTO \n")
+                                for content in Dates:
+                                    if content ["category"] == 2:
+                                         print(f" ${content['monto']:<14} {content['Description']:<40}")     
+                         case 3:
+                            Dates = read_file(PRODUCT_FILE_PATH)
+                            otros = []
+                            for content in Dates:                    
+                                if content["category"] == 3:         
+                                    otros.append(content)            
+                            if len(otros)== 0:
+                                print("¡No haz realizado ningun gasto extra!")
+                            else:
+                                Dates = read_file(PRODUCT_FILE_PATH)
+                                print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
+                                print("===             Categoria = Entretenimiento             ===")
+                                print("---------------------------------------------------------------------------------")
+                                print("= MONTO GASTADO         DESCRIPCION DEL GASTO \n")
+                                for content in Dates:
+                                    if content ["category"] == 3:
+                                         print(f" ${content['monto']:<14} {content['Description']:<40}")           
+                         case 4:
+                            Dates = read_file(PRODUCT_FILE_PATH)
+                            otros = []
+                            for content in Dates:                    
+                                if content["category"] == 4:         
+                                    otros.append(content)            
+                            if len(otros)== 0:
+                                print("¡No haz realizado ningun gasto extra!")
+                            else:
+                                Dates = read_file(PRODUCT_FILE_PATH)
+                                print("\n=== P R O D U C T O S  R E G I S T R A D O S ===")
+                                print("===             Categoria = Entretenimiento             ===")
+                                print("---------------------------------------------------------------------------------")
+                                print("= MONTO GASTADO         DESCRIPCION DEL GASTO \n")
+                                for content in Dates:
+                                    if content ["category"] == 4:
+                                         print(f" ${content['monto']:<14} {content['Description']:<40}")                                                                          
+                   
                 case 4:
                     break
-       case 3:
+       case 3:  #calcular total
          print(":3")
