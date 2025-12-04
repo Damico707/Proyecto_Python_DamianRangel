@@ -20,12 +20,6 @@ listar_Gastos = ("Ver todos los gastos",
 "Filtrar por rango de fechas",
 "Regresar al menu principal")
 
-Diccionario_cat = {
-        1: "Comida",
-        2: "Transporte",
-        3: "Entretenimiento",
-        4: "Otros"
-    }
 
 categorias= (" Comida.",
 " Transporte.",
@@ -100,10 +94,12 @@ while True:
                             print("Formato de fecha no válido (DIA-MES-AÑO)")
                 case 4:
                      break
-       case 3:  #calcular total
+       case 3:  #calcular total    #solucionar espacio alfinal al colocar el año
          choice = menuu( "    C A L C U L A R", "   (total gastos)", caso3_gastos)
          match choice:
             case 1:
                  Dates = read_file(PRODUCT_FILE_PATH)
-                 Total_diario= input("Para sacar el total diario, ingreas la fecha a eleccion (DIA-MES-AÑO)\n -->")
-                 Monto_diarioo(Dates, Total_diario)
+                 Monto_diarioo(Dates)
+            case 2:
+                 Dates = read_file(PRODUCT_FILE_PATH)
+                 Total_diario= input("Para sacar el total semanal, ingreas la fecha a eleccion (DIA-MES-AÑO)\n -->")

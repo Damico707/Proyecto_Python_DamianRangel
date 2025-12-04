@@ -1,4 +1,5 @@
 from datetime import datetime
+from datetime import timedelta
 
 Diccionario_cat = {
         1: "Comida",
@@ -107,32 +108,72 @@ def minimenu (Dates, numerito, categoria):
 #                if content ["time"] == fechafinal:
 #                     print(f" ${content['monto']:<17} {content['category']:<17} {content['Description']:<19} {content['time']:<}")
 
-def Monto_diarioo(Dates, fecha):
-    try:
-        fecha_validada = datetime.strptime(fecha, "%d-%m-%Y") 
-    except ValueError:
-        print("Formato de fecha incorrecto. Usa (DD-MM-YYYY)")
-        return
+
+def Monto_diarioo(Dates):
+    diahoy1= datetime.now()
+    diahoy= diahoy1.strftime("%d-%m-%Y")
     otros = []
     total_gasto = 0
-
     for content in Dates:                    
-        if content["time"] == fecha:  
+        if content["time"] == diahoy:  
             otros.append(content)
             total_gasto += content["monto"]
     if len(otros) == 0:
-        print(f"\n¡No tienes registrados gastos en la fecha {fecha}!")
+        print(f"\n¡No tienes registrados gastos en la fecha {diahoy}!")
     else:
         print("\n=======================================================")
         print("         P R O D U C T O S  R E G I S T R A D O S ")
-        print(f"                    Fecha: {fecha}                   ")
+        print(f"                    Fecha: {diahoy}                   ")
         print("=======================================================")
         print(" MONTO GASTADO    CATEGORÍA    DESCRIPCIÓN           FECHA")
         print("---------------------------------------------------------------")
         
         for content in Dates:
-            if content ["time"] == fecha:
+            if content ["time"] == diahoy:
                 print(f" ${content['monto']:<17} {Diccionario_cat[content['category']]:<27} {content['Description']:<19} {content['time']:<}")
         
         print("---------------------------------------------------------------")
         print(f" TOTAL DEL DÍA: ${total_gasto}")
+
+
+
+def Monto_semanal(Dates, fecha):
+    try:
+        fecha_validada = datetime.strptime(fecha, "%d-%m-%Y")
+        fecha_fin = fecha_validada + timedelta(days=6)  # 6 días después
+    except ValueError:
+        print("Formato de fecha incorrecto. Usa (DD-MM-YYYY)")
+        return
+    
+    otros = []
+    total_gasto = 0
+
+    for content in Dates:
+        try:
+            fecha_gasto = datetime.strptime(content["time"], "%d-%m-%Y")
+            
+            # Verificar si está en el rango (fecha inicial + 6 días)
+            if fecha_validada <= fecha_gasto <= fecha_fin:
+                otros.append(content)
+                total_gasto += content["monto"]
+        except:
+            continue
+    
+    if len(otros) == 0:
+        fecha_fin_str = fecha_fin.strftime("%d-%m-%Y")
+        print(f"\n¡No tienes registrados gastos entre {fecha} y {fecha_fin_str}!")
+    else:
+        fecha_fin_str = fecha_fin.strftime("%d-%m-%Y")
+        print("\n=======================================================")
+        print("         P R O D U C T O S  R E G I S T R A D O S ")
+        print(f"              Del {fecha} al {fecha_fin_str}")
+        print("=======================================================")
+        print(" FECHA         MONTO      CATEGORÍA              DESCRIPCIÓN")
+        print("---------------------------------------------------------------")
+        
+        for content in otros:
+            descripcion = content['Description'] if content['Description'] else "Sin descripción"
+            print(f" {content['time']:<12} ${content['monto']:<10} {Diccionario_cat[content['category']]:<22} {descripcion}")
+        
+        print("---------------------------------------------------------------")
+        print(f" TOTAL DE LA SEMANA: ${total_gasto}")

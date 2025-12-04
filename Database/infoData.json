@@ -1,0 +1,20 @@
+[
+    {
+        "monto": 9393,
+        "category": 1,
+        "Description": "",
+        "time": "03-12-2025"
+    },
+    {
+        "monto": 39823,
+        "category": 2,
+        "Description": "",
+        "time": "03-12-2025 "
+    },
+    {
+        "monto": 8000,
+        "category": 4,
+        "Description": "nicolascacorro",
+        "time": "03-12-2025"
+    }
+]
