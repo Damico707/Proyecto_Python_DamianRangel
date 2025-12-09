@@ -3,35 +3,11 @@ from jsonFileHandler import *
 from UtilsFunctions import *
 from datetime import datetime
 import os
+from Utilstuplas import *
 
-PRODUCT_FILE_PATH= "./Database/infoData.json"
-
-options = ("Registrar un nuevo gasto",
-"Listar gastos",
-"Calcular total de gastos",
-"Generar reporte de gastos",
-"Finalizar programa",)
-
-caso3_gastos = ("Calcular total diario",
-"Calcular total semanal",
-"Calcular total mensual",
-"Regresar al menu principal")
-
-caso4_gastos = ("Reporte Diario",
-"Reporte Semanal",
-"Reporte Mensual",
-"Regresar al menu principal")
-
-listar_Gastos = ("Ver todos los gastos",
-"Filtrar por categoria",
-"Filtrar por rango de fechas",
-"Regresar al menu principal")
+PRODUCT_FILE_PATH= "./Database/infoData.json"   #El puente hacia el json con la informacion
 
 
-categorias= (" Comida.",
-" Transporte.",
-" Entretenimiento.",
-" Otros.")
 
 while True:
     choice = menuu("| O R G A N I Z A D O R|" , "--Gastos Diarios--" , options)
@@ -39,10 +15,11 @@ while True:
        case 1:
             limpiarpantalla()
             content = {
-                "monto": correct_number("¿De cuanto fue el gasto?\n --< ",),
+                "monto": correct_number("¿De cuanto fue el gasto?\n --> ", int , range(1,10000000000 )),
                 "category": correct_number("\n1. Comida\n2. Transporte\n3. Entretenimiento\n4. Otros\nSelecciona la categoria del gasto\n --> ", int, range(1, 5)),
                 "Description":input("Descripcion del gasto //'Enter' para dejar vacio:\n -->"),
                 "time":correct_fecha("Ingrese la fecha del gasto //'DD-MM-YYYY//'\n -->")
+                    
             }
             while True:
                 sure= input("Ingrese 'S' para guardar o 'C' para cancelar").strip().lower()
@@ -56,8 +33,8 @@ while True:
                     print(f"Descripción: {content['Description']}")
                     print(f"Fecha: {content['time']}")
 
-                    datacontent = read_file(PRODUCT_FILE_PATH)
-                    datacontent.append(content)
+                    datacontent = read_file(PRODUCT_FILE_PATH)  
+                    datacontent.append(content)                    #Se abre el json, se ingresa la nueva informacion, se guarda
                     saveFile(PRODUCT_FILE_PATH, datacontent)
                     break
                 else:

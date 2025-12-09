@@ -1,16 +1,11 @@
 from datetime import datetime
 from datetime import timedelta
 import os
+from UtilsDictionary import *
 
-Diccionario_cat = {
-        1: "Comida",
-        2: "Transporte",
-        3: "Entretenimiento",
-        4: "Otros"
-    }
+
 
 def limpiarpantalla():
-    """Limpia la pantalla de la consola"""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def correct_number(mensaje, tipo=int, rango=None):
@@ -28,7 +23,10 @@ def correct_fecha(fechita):
     while True:
         fecha = input(fechita)
         try:
-            datetime.strptime(fecha, "%d-%m-%Y")
+            fecha = datetime.strptime(fecha, "%d-%m-%Y") 
+            if fecha > datetime.now():
+                print("La fecha es futura, por favor intente nuevamente\n") #Se le indica al programa pasar un texto a una objeto real
+                continue 
             return fecha  
         except ValueError:
             print("Fecha invalida, porfavor usa este formato (DD-MM-YYYY)")
