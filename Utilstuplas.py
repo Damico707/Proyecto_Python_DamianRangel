@@ -14,11 +14,13 @@ options = ("Registrar un nuevo gasto",
 caso3_gastos = ("Calcular total diario",
 "Calcular total semanal",
 "Calcular total mensual",
-"Regresar al menu principal")
+"Regresar al menu principal"
+)
 
 caso4_gastos = ("Reporte Diario",
 "Reporte Semanal",
 "Reporte Mensual",
+"Reporte DETALLADO",
 "Regresar al menu principal")
 
 listar_Gastos = ("Ver todos los gastos",
@@ -31,3 +33,9 @@ categorias= (" Comida.",
 " Transporte.",
 " Entretenimiento.",
 " Otros.")
+
+categorias_reporteDetallado =(" Comida.",
+" Transporte.",
+" Entretenimiento.",
+" Otros.",
+"Todas.")

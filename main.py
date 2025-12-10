@@ -84,15 +84,16 @@ while True:
                     limpiarpantalla()
                     print("Filtrar por fechas")
                     try:
-                        fecha1 = correct_fecha("Ingrese la fecha del gasto //'DD-MM-YYYY//'\n -->")
+                        fecha1 = correct_fecha("Ingrese la fecha inicial //'DD-MM-YYYY//'\n -->")
                         objDate1 = datetime.strptime(fecha1, "%d-%m-%Y") 
-                        fecha2 = correct_fecha("Ingrese la fecha del gasto //'DD-MM-YYYY//'\n -->")
+                        fecha2 = correct_fecha("Ingrese la fecha limite//'DD-MM-YYYY//'\n -->")
                         objDate2 = datetime.strptime(fecha2, "%d-%m-%Y")
                         dataGasto = read_file(PRODUCT_FILE_PATH)
                         info = filtroFecha(dataGasto, objDate1, objDate2)
                         categories(info)
                     except ValueError:
                             print("Formato de fecha no válido (DIA-MES-AÑO)")
+                    
                 case 4:
                      limpiarpantalla()
                      break
@@ -118,7 +119,7 @@ while True:
         # CASE 4 → Reportes
        case 4:
         while True:
-         choice = menuu( "    R E P O R T E S", "   (total gastos)", caso3_gastos)
+         choice = menuu( "    R E P O R T E S", "   (total gastos)", caso4_gastos)
          match choice:
             case 1:
                 limpiarpantalla()
@@ -131,10 +132,31 @@ while True:
             case 3:
                 limpiarpantalla()
                 Dates = read_file(PRODUCT_FILE_PATH)
-                menumensual(Dates)              
+                menumensual(Dates) 
             case 4:
+                    try:
+                     choice= menuu("Seleccione" "categoria (opcional)\n -->", categorias_reporteDetallado)
+                     match choice:
+                        case 1:
+                             Dates = read_file(PRODUCT_FILE_PATH)
+                             menu_reporte_detallado(Dates, 1, "Comida", fecha1. fecha2)
+                             fecha1 = correct_fecha("Ingrese la fecha inicial //'DD-MM-YYYY//'\n -->")
+                             fecha2 = correct_fecha("Ingrese la fecha final //'DD-MM-YYYY//'\n -->")
+                        case 2:
+                             Dates = read_file(PRODUCT_FILE_PATH)
+                             menu_reporte_detallado(Dates, 2, "Transporte")
+                        case 3:
+                             Dates = read_file(PRODUCT_FILE_PATH)
+                             menu_reporte_detallado(Dates, 3, "Entretenimiento")           
+                        case 4: 
+                            Dates = read_file(PRODUCT_FILE_PATH)
+                            menu_reporte_detallado(Dates, 4, "Otros") 
+                    except ValueError:
+                        print("Error, intente nuevamente")
+            case 5:
                 limpiarpantalla()
                 break
+             
         # CASE 5 → Salir del programa
        case 5:
         answer = input("¿Desea salir del programa? (S/N): ")

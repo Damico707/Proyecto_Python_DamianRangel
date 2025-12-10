@@ -2,7 +2,7 @@ from datetime import datetime
 from datetime import timedelta
 import os
 from UtilsDictionary import *
-
+from jsonFileHandler import *
 
 
 def limpiarpantalla():
@@ -31,10 +31,7 @@ def correct_fecha(fechita):
     while True:
         fecha = input(fechita)
         try:
-            fecha = datetime.strptime(fecha, "%d-%m-%Y") 
-            if fecha > datetime.now():
-                print("La fecha es futura, por favor intente nuevamente\n") #Se le indica al programa pasar un texto a una objeto real
-                continue 
+            datetime.strptime(fecha, "%d-%m-%Y")
             return fecha  
         except ValueError:
             print("Fecha invalida, porfavor usa este formato (DD-MM-YYYY)")
@@ -96,6 +93,38 @@ def categories(info):
 # Muestra gastos filtrados por una categoría (1–4)
 # numerito = código de categoría
 # categoria = nombre de la categoría
+
+def menu_reporte_detallado(Dates, numerito, categoria, fecha1, fecha2):
+        Dates
+        otros = []
+        try:
+         fecha1 = datetime.strptime(fecha1, "%d-%m-%Y") 
+         fecha2 = datetime.strptime(fecha2, "%d-%m-%Y")
+         categories(info)
+        except ValueError:
+            print("Formato de fecha no válido (DIA-MES-AÑO)")        
+        for content in Dates:                    
+            if content["category"] == numerito:         
+                otros.append(content)            
+        if len(otros)== 0:
+            print("¡No haz realizado ningun gasto extra!")
+        else:
+            
+            Dates
+            print("=======================================================")
+            print("         P R O D U C T O S  R E G I S T R A D O S ")
+            print(f"                 Categoria = {categoria}         ")
+            Print(f"             {fecha_ini}  hasta {fecha_fin}       ")
+            print("=======================================================")
+            print(" |     MONTO     |     DESCRIPCION    |    ")
+            print(" |    GASTADO    |      DEL GASTO     |   FECHA ")
+            print("------------------------------------------------------")
+            categories
+            for content in Dates:
+                if content ["category"] == numerito:
+                     print(f" ${content['monto']:<17} {content['Description']:<19} {content['time']:<}")
+            
+      
 
 def minimenu (Dates, numerito, categoria):
         Dates
