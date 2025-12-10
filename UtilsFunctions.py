@@ -8,6 +8,10 @@ from UtilsDictionary import *
 def limpiarpantalla():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+# Solicita un número válido y dentro de un rango permitido
+# mensaje: lo que muestra al usuario
+# tipo: tipo de dato esperado (int por defecto)
+# rango: rango de valores aceptados (range)
 def correct_number(mensaje, tipo=int, rango=None):
     while True:
         try:
@@ -18,6 +22,10 @@ def correct_number(mensaje, tipo=int, rango=None):
             return valor
         except ValueError:
             print("Error, debes ingresar un número válido\n")
+
+# Solicita una fecha válida en formato DD-MM-YYYY
+# No permite fechas futuras
+# Devuelve un objeto datetime
 
 def correct_fecha(fechita):
     while True:
@@ -30,6 +38,9 @@ def correct_fecha(fechita):
             return fecha  
         except ValueError:
             print("Fecha invalida, porfavor usa este formato (DD-MM-YYYY)")
+
+# Genera un menú dinámico con un título y lista de opciones
+# Devuelve la opción seleccionada (int)
 
 def menuu(titulo, title, options):
     choice = 0
@@ -52,6 +63,9 @@ def menuu(titulo, title, options):
             print("Error, Solo se aceptan numeros")    
     return choice
     
+# Filtra una lista de gastos entre dos fechas (inicio - fin)
+# Devuelve {"data": [gastos]}
+
 def filtroFecha(datalist, fecha_ini, fecha_fin ):
     results = {"data": []}
     for gasto in datalist:
@@ -64,6 +78,9 @@ def filtroFecha(datalist, fecha_ini, fecha_fin ):
             continue
     return results
 
+# Imprime los datos filtrados en formato tabla
+# info debe ser {"data": [...]} como retorna filtroFecha()
+
 def categories(info):
     TEMPLATE_TITLE = "{:^0}{:^20}{:^20}{:^20}"
     TEMPLATE = "{:<12}{:<18}{:<20}{:<20}"
@@ -74,6 +91,11 @@ def categories(info):
 
     for item in info["data"]: 
         print(TEMPLATE.format(item['monto'], item['category'], item['Description'], item['time']))
+
+
+# Muestra gastos filtrados por una categoría (1–4)
+# numerito = código de categoría
+# categoria = nombre de la categoría
 
 def minimenu (Dates, numerito, categoria):
         Dates
@@ -97,6 +119,8 @@ def minimenu (Dates, numerito, categoria):
                 if content ["category"] == numerito:
                      print(f" ${content['monto']:<17} {content['Description']:<19} {content['time']:<}")
 
+# Calcula y muestra el total gastado HOY
+
 def Monto_diarioo(Dates):
     diahoy1= datetime.now()
     diahoy= diahoy1.strftime("%d-%m-%Y")
@@ -115,6 +139,7 @@ def Monto_diarioo(Dates):
         print(f" TOTAL DEL DÍA: ${total_gasto}")
         print("=======================================================")
 
+# Total gastado en los últimos 7 días
 
 def Monto_semanal(Dates):
     try:
@@ -146,6 +171,8 @@ def Monto_semanal(Dates):
         print("---------------------------------------------------------------")
         print(f" TOTAL DE LA SEMANA: ${total_gasto}")
         print("=======================================================")
+
+# Total gastado en los últimos 30 días
 
 def Monto_mensual(Dates):
     try:
@@ -179,6 +206,7 @@ def Monto_mensual(Dates):
         print(f" TOTAL DE LA SEMANA: ${total_gasto}")
         print("===============================================================")
 
+# Reporte diario con tabla detallada
 
 def menudiario(Dates):
     diahoy1= datetime.now()
@@ -204,6 +232,8 @@ def menudiario(Dates):
             print(f" ${content['monto']:<17} {Diccionario_cat[content['category']]:<22} {content['Description']:<19} {content['time']:<}")
         print("---------------------------------------------------------------")
         print(f" TOTAL DEL DIA: -{total_gasto}")
+
+# Reporte semanal detallado
 
 def menusemanal(Dates):
     try:
@@ -241,6 +271,8 @@ def menusemanal(Dates):
         
         print("---------------------------------------------------------------")
         print(f" TOTAL DE LA SEMANA: -{total_gasto}")
+
+# Reporte mensual detallado (últimos 30 días)
 
 def menumensual(Dates):
     try:

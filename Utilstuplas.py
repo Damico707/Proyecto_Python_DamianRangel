@@ -1,4 +1,4 @@
-Diccionario_cat = {
+Diccionario_cat = {                               #Distintas tuplas con su funcion dentro del codigo en el nombre
         1: "Comida",
         2: "Transporte",
         3: "Entretenimiento",

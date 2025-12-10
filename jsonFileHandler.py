@@ -1,5 +1,8 @@
 from json import dumps, load
 
+# Lee un archivo JSON y devuelve su contenido como lista o diccionario.
+# Si el archivo no existe o está vacío, devuelve una lista vacía.
+
 def read_file(filePath):
     try:
         fileData = None
@@ -10,8 +13,10 @@ def read_file(filePath):
     except:
         return[]
 
+# Guarda en formato JSON la data proporcionada en `data`
+# Sobrescribe completamente el contenido del archivo.
 def saveFile(fileName, data):
-    jsonFile = open(fileName, "w")     #la w es la que crea el archivo desde 0, como renovando la informacion
-    jsonFile.write(dumps(data))  #convierte la info en texto json con dumps
+    jsonFile = open(fileName, "w")     
+    jsonFile.write(dumps(data))  
     jsonFile.close()
     print("Datos guardados correctamente")

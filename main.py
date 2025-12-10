@@ -8,11 +8,14 @@ from Utilstuplas import *
 PRODUCT_FILE_PATH= "./Database/infoData.json"   #El puente hacia el json con la informacion
 
 
-
+# Bucle principal del programa
 while True:
+     # Menú principal
     choice = menuu("| O R G A N I Z A D O R|" , "--Gastos Diarios--" , options)
     match choice:
+        # CASE 1 → Registrar un gasto nuevo
        case 1:
+            # Se recopila la información del nuevo gasto
             limpiarpantalla()
             content = {
                 "monto": correct_number("¿De cuanto fue el gasto?\n --> ", int , range(1,10000000000 )),
@@ -27,6 +30,7 @@ while True:
                     print("Gasto cancelado")
                     break
                 elif sure == "s":
+                    # Confirmación visual de datos guardados
                     print("\n* Datos guardados correctamente*")
                     print(f"Monto: ${content['monto']}")
                     print(f"Categoría: {content['category']} , {Diccionario_cat[content['category']]}")
@@ -39,6 +43,7 @@ while True:
                     break
                 else:
                     print("Eror, datos no almacenados, intente nuevamente")
+       # CASE 2 → Listar gastos registrados
        case 2:
         limpiarpantalla()
         while True:
@@ -57,7 +62,7 @@ while True:
                         print("---------------------------------------------------------------------------------")
                         for content in Dates:
                             print(f" {content['monto']:<22} {Diccionario_cat[content['category']]:<27}  {content['Description']:<18} {content['time']}")
-               
+               # Listar filtrando por categorías
                 case 2:
                      limpiarpantalla()
                      choice = menuu("    C A T E G O R I A S     ","(selecciona para ver los gastos)", categorias )
@@ -73,7 +78,8 @@ while True:
                              minimenu(Dates, 3, "Entretenimiento")           
                         case 4: 
                             Dates = read_file(PRODUCT_FILE_PATH)
-                            minimenu(Dates, 4, "Otros")                                                                            
+                            minimenu(Dates, 4, "Otros")  
+                  # Filtrar por fecha                                                                                    
                 case 3:
                     limpiarpantalla()
                     print("Filtrar por fechas")
@@ -90,6 +96,7 @@ while True:
                 case 4:
                      limpiarpantalla()
                      break
+        # CASE 3 → Calcular montos -diario, semanal, mensual-
        case 3:  
         while True:
          choice = menuu( "    C A L C U L A R", "   (total gastos)", caso3_gastos)
@@ -108,6 +115,7 @@ while True:
                  Monto_mensual(Dates)
             case 4:
                  break
+        # CASE 4 → Reportes
        case 4:
         while True:
          choice = menuu( "    R E P O R T E S", "   (total gastos)", caso3_gastos)
@@ -127,6 +135,7 @@ while True:
             case 4:
                 limpiarpantalla()
                 break
+        # CASE 5 → Salir del programa
        case 5:
         answer = input("¿Desea salir del programa? (S/N): ")
 
